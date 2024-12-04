@@ -70,7 +70,16 @@ public class App {
             public void actionPerformed(ActionEvent e) {
                 try {
                     String stockName = stockNameField.getText().trim();
-                    if (!stockName.equals("HD한국조선해양")) {
+                    
+                    String rfClassModelPath = "models/" + stockName + "_rf_class.onnx";
+                    String rfRegModelPath = "models/" + stockName + "_rf_reg.onnx";
+                    String abClassModelPath = "models/" + stockName + "_ab_class.onnx";
+                    String abRegModelPath = "models/" + stockName + "_ab_reg.onnx";
+
+                    if (!new java.io.File(rfClassModelPath).exists() || 
+                        !new java.io.File(rfRegModelPath).exists() || 
+                        !new java.io.File(abClassModelPath).exists() || 
+                        !new java.io.File(abRegModelPath).exists()) {
                         resultLabel.setText("해당 주식 모델이 없습니다: " + stockName);
                         resultLabel.setForeground(Color.RED);
                         return;
@@ -88,11 +97,6 @@ public class App {
                     }
         
                     float currentPrice = inputFeatures[0]; // User input for current stock price
-        
-                    String rfClassModelPath = "models/HD한국조선해양_rf_class.onnx";
-                    String rfRegModelPath = "models/HD한국조선해양_rf_reg.onnx";
-                    String abClassModelPath = "models/HD한국조선해양_ab_class.onnx";
-                    String abRegModelPath = "models/HD한국조선해양_ab_reg.onnx";
         
                     String rfClassResult = predictWithOnnx(rfClassModelPath, inputFeatures, true);
                     float rfRegResult = Float.parseFloat(predictWithOnnx(rfRegModelPath, inputFeatures, false));
