@@ -7,6 +7,8 @@ import ai.onnxruntime.*;
 
 public class App {
     public static void main(String[] args) {
+
+        accuracy accuracy = new accuracy();
         JFrame frame = new JFrame("주식 추천 시스템");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 1000);
@@ -118,6 +120,9 @@ public class App {
                         abFinalRecommendation = "비추천";
                         // abRegResult = Math.abs(abRegResult); // Treat as warning case
                     }
+
+                    double rfAccuracy = accuracy.output_rf(stockName);
+                    double abAccuracy = accuracy.output_ad(stockName);
         
                     String result = String.format(
                         "<html>주식: %s<br>" +
@@ -125,18 +130,22 @@ public class App {
                         "- 추천: %s<br>" +
                         "- 예상 변동 폭: %.2f<br>" +
                         "- 예상 주가: %.2f<br>" +
+                        "- 정확도: %.2f<br>" +
                         "애드부스트<br>" +
                         "- 추천: %s<br>" +
                         "- 예상 변동 폭: %.2f<br>" +
                         "- 예상 주가: %.2f<br>" +
+                        "- 정확도: %.2f<br>" +
                         "</html>",
                         stockName,
                         rfFinalRecommendation,
                         rfRegResult,
                         rfPredictedPrice,
+                        rfAccuracy,
                         abFinalRecommendation,
                         abRegResult,
-                        abPredictedPrice
+                        abPredictedPrice,
+                        abAccuracy
                     );
         
                     resultLabel.setText(result);
