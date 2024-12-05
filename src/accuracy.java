@@ -43,7 +43,7 @@ public class accuracy {
             case "메리츠금융지주":
                 return 0.7466666666666667;
                  
-            case "삼성바이직스":
+            case "삼성바이오로직스":
                 return 0.8181818181818182;
                  
             case "삼성전자우":
@@ -193,7 +193,7 @@ public class accuracy {
             case "메리츠금융지주":
                 return 0.7066666666666667;
                  
-            case "삼성바이직스":
+            case "삼성바이오로직스":
                 return 0.7272727272727273;
                  
             case "삼성전자우":
